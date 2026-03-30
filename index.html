@@ -753,29 +753,101 @@
                 font-size: 2.2rem;
                 letter-spacing: 3px;
             }
+            .collection {
+                padding: 2.3rem 0.8rem;
+            }
+            .rubik-collection-container {
+                flex-direction: column;
+                gap: 0;
+                min-height: 0;
+                padding: 0.2rem 0;
+            }
+            .rubik-main {
+                width: 100%;
+                max-width: 100%;
+                padding: 0 0.2rem;
+            }
+            .rubik-group {
+                position: relative;
+                width: 100%;
+                min-width: 0;
+                gap: 6px;
+                padding: 0.25rem 0;
+                border-radius: 24px;
+            }
             .horizontal-rubik-wheel {
-                width: 340px;
-                height: 240px;
+                width: min(96vw, 460px);
+                height: clamp(230px, 56vw, 320px);
             }
             .rubik-img {
-                width: 130px;
-                height: 130px;
+                width: min(52vw, 240px);
+                height: min(52vw, 240px);
+                border-radius: 20px;
             }
             .rubik-slot.center-slot {
-                transform: translateX(-50%) scale(1.1);
+                transform: translateX(-50%) scale(1.16);
             }
             .rubik-slot.left-slot,
             .rubik-slot.right-slot {
-                transform: scale(0.7);
+                opacity: 0.35;
+                transform: scale(0.82);
+            }
+            .rubik-arrow {
+                position: absolute;
+                top: 50%;
+                width: 44px;
+                height: 44px;
+                font-size: 20px;
+                transform: translateY(-50%);
+                z-index: 20;
+            }
+            .rubik-group > .rubik-arrow:first-child {
+                left: 6px;
+            }
+            .rubik-group > .rubik-arrow:last-child {
+                right: 6px;
+            }
+            .rubik-arrow:hover {
+                transform: translateY(-50%) scale(1.05);
             }
             .testimonials-grid {
                 grid-template-columns: 1fr;
             }
-            .rubik-collection-container {
-                flex-direction: column;
-            }
             .vertical-nav {
-                flex-direction: row;
+                position: absolute;
+                top: calc(50% - 18px);
+                z-index: 25;
+                pointer-events: none;
+            }
+            .rubik-collection-container > .vertical-nav:first-child {
+                left: 10px;
+            }
+            .rubik-collection-container > .vertical-nav:last-child {
+                right: 10px;
+            }
+            .vertical-arrow {
+                width: 48px;
+                height: 48px;
+                font-size: 22px;
+                pointer-events: auto;
+                box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28);
+            }
+            .product-info-panel {
+                width: calc(100% - 1rem);
+                max-width: 520px;
+                margin-top: 0.75rem;
+                padding: 0.8rem 1rem;
+                border-radius: 20px;
+            }
+            #rubikSelectedName {
+                font-size: 1.95rem;
+            }
+            #rubikSelectedPrice {
+                font-size: 2rem;
+            }
+            .picker-instructions {
+                margin-top: 0.9rem;
+                font-size: 0.85rem;
             }
             .footer-content {
                 grid-template-columns: 1fr;
@@ -787,10 +859,31 @@
             .logo-img {
                 height: 50px;
             }
-            .rubik-group {
-                gap: 15px;
-                padding: 10px 15px;
-                min-width: 320px;
+            .collection-subtitle {
+                letter-spacing: 1.2px;
+                font-size: 0.76rem;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .horizontal-rubik-wheel {
+                width: 98vw;
+            }
+            .rubik-img {
+                width: min(56vw, 220px);
+                height: min(56vw, 220px);
+            }
+            .rubik-group > .rubik-arrow:first-child {
+                left: 2px;
+            }
+            .rubik-group > .rubik-arrow:last-child {
+                right: 2px;
+            }
+            #rubikSelectedName {
+                font-size: 1.75rem;
+            }
+            #rubikSelectedPrice {
+                font-size: 1.82rem;
             }
         }
     </style>
