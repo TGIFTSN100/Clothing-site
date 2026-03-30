@@ -329,12 +329,35 @@
         }
 
         .collection-tagline {
-            text-align: center;
+            width: min(92%, 720px);
+            margin: 0.55rem auto 0;
+            border: 1px solid rgba(212, 175, 55, 0.55);
+            background: linear-gradient(90deg, rgba(212, 175, 55, 0.18), rgba(30, 42, 42, 0.06));
             color: #1e2a2a;
-            margin-top: 0.4rem;
+            border-radius: 999px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-align: left;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .collection-tagline-track {
+            display: inline-block;
             font-size: 0.9rem;
             font-style: italic;
-            letter-spacing: 0.4px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            padding: 0.45rem 0;
+            animation: adRibbonLeftToRight 10s linear infinite;
+        }
+
+        @keyframes adRibbonLeftToRight {
+            0% {
+                transform: translateX(-100%);
+            }
+            100% {
+                transform: translateX(110%);
+            }
         }
 
         .rubik-collection-container {
@@ -878,8 +901,12 @@
                 font-size: 0.76rem;
             }
             .collection-tagline {
-                font-size: 0.85rem;
                 margin-top: 0.35rem;
+                width: min(96%, 560px);
+            }
+            .collection-tagline-track {
+                font-size: 0.8rem;
+                padding: 0.42rem 0;
             }
         }
 
@@ -971,7 +998,7 @@
     <section class="appointment-promo">
         <div class="appointment-content">
             <h2>MAKE AN APPOINTMENT</h2>
-            <a href="#appointment" class="btn btn-light">BOOK YOUR APPOINTMENT</a>
+            <a href="#appointment" class="btn btn-light">MAKE AN ORDER</a>
         </div>
     </section>
 
@@ -980,7 +1007,7 @@
         <div class="collection-header">
             <h2 class="section-title">ET COLECTIONS</h2>
             <p class="collection-subtitle">ELIZABETH TADIWA LUXURIES</p>
-            <p class="collection-tagline">your number one shein plug</p>
+            <p class="collection-tagline"><span class="collection-tagline-track">your number one shein plug</span></p>
         </div>
         
         <div class="rubik-collection-container">
@@ -1032,7 +1059,7 @@
     <section id="appointment" class="appointment-section">
         <h2>EMBRACE Your STYLE</h2>
         <p>Schedule an appointment with our style experts</p>
-        <a href="#" class="btn btn-light">BOOK AN APPOINTMENT</a>
+        <a href="#" class="btn btn-light">MAKE AN ORDER</a>
     </section>
 
     <!-- Footer -->
