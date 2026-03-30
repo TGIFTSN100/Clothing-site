@@ -1,4 +1,4 @@
-# Mudiwa Hood Luxury Boutique Website
+# Takudzwa Gift Luxury Boutique Website
 
 A modern, elegant e-commerce website for a luxury fashion boutique, built with HTML, CSS, and JavaScript.
 
@@ -170,8 +170,8 @@ The website includes JavaScript functions ready for backend integration:
 ## 📧 Contact Information
 
 Default contact details in footer:
-- **Phone:** +263 242 702 853
-- **Email:** info@mudiwahood.store
+- **Phone:** +263 789 795 764
+- **Email:** info@takuegift.store
 
 ## 🔐 SEO & Meta Tags
 
@@ -202,7 +202,7 @@ Default contact details in footer:
 
 ## 📄 License
 
-© 2026 Mudiwa Hood Luxury Boutique. All Rights Reserved.
+© 2026 Takudzwa Gift Luxury Boutique. All Rights Reserved.
 
 ## 📞 Support
 
