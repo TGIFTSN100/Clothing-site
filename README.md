@@ -207,7 +207,7 @@ Default contact details in footer:
 ## 📞 Support
 
 For customization and integration support, contact:
-- **Email:** info@mudiwahood.store
+- **Email:** info@takuegift.store
 - **Phone:** +263 242 702 853
 
 ---
