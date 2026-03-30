@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Elizabeth Tadiwa | Elizabeth Tadiwa Luxuries</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', 'Poppins', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #faf7f2;
+            color: #1e2a2a;
+        }
+
+        /* Top Header Bar - Contact Info */
+        .top-header {
+            background: #0a0a0a;
+            padding: 0.8rem 2rem;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+        }
+
+        .top-header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-info a {
+            color: #ccc;
+            text-decoration: none;
+            font-size: 0.75rem;
+            transition: color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .contact-info a i {
+            color: #d4af37;
+            font-size: 0.8rem;
+        }
+
+        .contact-info a:hover {
+            color: #d4af37;
+        }
+
+        /* Sticky Navigation Menu - Visible on Scroll, Centered */
+        .sticky-nav {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .sticky-nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .sticky-nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        .sticky-nav-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .sticky-nav-link:hover {
+            color: #d4af37;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            position: absolute;
+            right: 2rem;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: #fff;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Logo Section - Hidden on Scroll */
+        .logo-section {
+            background: #0a0a0a;
+            padding: 1.2rem 0;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .logo-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo-wrapper {
+            text-align: center;
+        }
+
+        .logo-wrapper a {
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 70px;
+            width: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-img:hover {
+            transform: scale(1.02);
+        }
+
+        .logo-fallback {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #d4af37;
+            letter-spacing: 2px;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .brand-name {
+            font-size: 0.75rem;
+            letter-spacing: 3px;
+            color: #d4af37;
+            margin-top: 6px;
+            font-weight: 500;
+        }
+
+        .logo-section.hide-logo {
+            transform: translateY(-100%);
+            opacity: 0;
+            visibility: hidden;
+            padding: 0;
+            height: 0;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            min-height: 700px;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1600') center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            padding: 0 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: 4.5rem;
+            color: #fff;
+            letter-spacing: 6px;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 14px 45px;
+            background: transparent;
+            border: 2px solid #d4af37;
+            color: #d4af37;
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 2px;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .hero-btn:hover {
+            background: #d4af37;
+            color: #1e2a2a;
+        }
+
+        /* About Section */
+        .about-main {
+            padding: 4rem 2rem;
+            background: #fff;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: #d4af37;
+        }
+
+        .about-text {
+            max-width: 900px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.8;
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 32px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: #1e2a2a;
+            color: #fff;
+            border: 2px solid #1e2a2a;
+        }
+
+        .btn-primary:hover {
+            background: #d4af37;
+            border-color: #d4af37;
+            color: #1e2a2a;
+        }
+
+        /* Appointment Promo */
+        .appointment-promo {
+            background: linear-gradient(135deg, #1e2a2a 0%, #2c3e2f 100%);
+            padding: 3rem 2rem;
+            text-align: center;
+            color: #fff;
+        }
+
+        .appointment-promo h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+        }
+
+        .btn-light {
+            background: transparent;
+            color: #fff;
+            border: 2px solid #fff;
+        }
+
+        .btn-light:hover {
+            background: #fff;
+            color: #1e2a2a;
+        }
+
+        /* COLLECTION SECTION - REDUCED SPACING, LARGER IMAGES */
+        .collection {
+            padding: 3rem 2rem;
+            background: linear-gradient(to bottom, #fff, #f8f4ed);
+            text-align: center;
+        }
+
+        .collection-header {
+            margin-bottom: 1rem;
+        }
+
+        .collection-subtitle {
+            text-align: center;
+            color: #d4af37;
+            letter-spacing: 2px;
+            margin-top: 0.3rem;
+            font-size: 0.85rem;
+        }
+
+        .rubik-collection-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            min-height: 600px;
+        }
+
+        .vertical-nav {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .vertical-arrow {
+            background: rgba(30, 42, 42, 0.9);
+            border: 1px solid #d4af37;
+            width: 55px;
+            height: 55px;
+            border-radius: 60px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #d4af37;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .vertical-arrow:hover {
+            background: #d4af37;
+            color: #1e2a2a;
+            transform: scale(1.05);
+        }
+
+        .rubik-main {
+            flex: 1;
+            max-width: 1100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .vertical-display {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .rubik-group {
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+            padding: 15px 25px;
+            border-radius: 80px;
+            transition: all 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            width: 100%;
+            min-width: 420px;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .rubik-group.active-vertical {
+            display: flex;
+            background: rgba(212, 175, 55, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ENLARGED HORIZONTAL WHEEL */
+        .horizontal-rubik-wheel {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            width: 850px;
+            height: 500px;
+        }
+
+        .rubik-slot {
+            position: absolute;
+            transition: all 0.4s cubic-bezier(0.25, 0.9, 0.4, 1.1);
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* ENLARGED CENTER IMAGE */
+        .rubik-slot.center-slot {
+            opacity: 1;
+            filter: blur(0px) brightness(1.1);
+            transform: scale(1.25);
+            z-index: 10;
+            left: 50%;
+            transform: translateX(-50%) scale(1.25);
+        }
+
+        .rubik-slot.center-slot .rubik-img {
+            box-shadow: 0 0 50px rgba(212, 175, 55, 0.8), 0 20px 40px rgba(0, 0, 0, 0.3);
+            border: 4px solid #d4af37;
+        }
+
+        /* ENLARGED LEFT IMAGE */
+        .rubik-slot.left-slot {
+            opacity: 0.3;
+            filter: blur(1.5px) brightness(0.5);
+            transform: scale(0.85);
+            left: 0%;
+            transform: translateX(0%) scale(0.85);
+            z-index: 5;
+        }
+
+        /* ENLARGED RIGHT IMAGE */
+        .rubik-slot.right-slot {
+            opacity: 0.3;
+            filter: blur(1.5px) brightness(0.5);
+            transform: scale(0.85);
+            right: 0%;
+            left: auto;
+            transform: translateX(0%) scale(0.85);
+            z-index: 5;
+        }
+
+        /* ENLARGED IMAGE STYLES */
+        .rubik-img {
+            width: 350px;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 28px;
+            background: #f0e8dc;
+            transition: all 0.3s ease;
+            display: block;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .rubik-arrow {
+            background: rgba(30, 42, 42, 0.9);
+            border: 1px solid #d4af37;
+            width: 52px;
+            height: 52px;
+            border-radius: 60px;
+            font-size: 22px;
+            font-weight: bold;
+            color: #d4af37;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .rubik-arrow:hover {
+            background: #d4af37;
+            color: #1e2a2a;
+            transform: scale(1.05);
+        }
+
+        /* COMPACT PRODUCT INFO PANEL - CLOSER TO IMAGES */
+        .product-info-panel {
+            margin-top: 0.8rem;
+            padding: 0.8rem 2rem;
+            background: rgba(30, 42, 42, 0.05);
+            border-radius: 50px;
+            width: 100%;
+            max-width: 450px;
+            text-align: center;
+        }
+
+        .group-counter {
+            text-align: center;
+            margin-bottom: 0.3rem;
+            font-size: 0.8rem;
+            color: #d4af37;
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        #rubikSelectedName {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1e2a2a;
+            margin-bottom: 0.2rem;
+        }
+
+        #rubikSelectedPrice {
+            font-size: 1.3rem;
+            color: #d4af37;
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+        }
+
+        .product-info-panel .btn-primary {
+            padding: 8px 24px;
+            font-size: 0.8rem;
+        }
+
+        .picker-instructions {
+            text-align: center;
+            margin-top: 0.8rem;
+            color: #999;
+            font-size: 0.75rem;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 4rem 2rem;
+            background: #f5f0e8;
+            text-align: center;
+        }
+
+        .testimonials-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .testimonial-card {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
+            text-align: left;
+            border: 1px solid #eee;
+            transition: transform 0.3s;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .testimonial-author {
+            color: #d4af37;
+            letter-spacing: 1px;
+            font-weight: 600;
+            font-size: 0.8rem;
+        }
+
+        /* Appointment Section */
+        .appointment-section {
+            background: linear-gradient(135deg, #1e2a2a 0%, #2c3e2f 100%);
+            padding: 4rem 2rem;
+            text-align: center;
+            color: #fff;
+        }
+
+        .appointment-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+            letter-spacing: 2px;
+        }
+
+        .appointment-section p {
+            margin-bottom: 2rem;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        .footer {
+            background: #0f1a1a;
+            color: #ccc;
+            padding: 3rem 2rem 1.5rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            text-align: left;
+        }
+
+        .footer-section h3 {
+            color: #d4af37;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            font-weight: 500;
+        }
+
+        .footer-section p {
+            line-height: 1.6;
+            font-size: 0.8rem;
+            color: #aaa;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #aaa;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.8rem;
+        }
+
+        .footer-section a:hover {
+            color: #d4af37;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            font-size: 1.2rem;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.7rem;
+            color: #888;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 1200px) {
+            .horizontal-rubik-wheel {
+                width: 700px;
+                height: 420px;
+            }
+            .rubik-img {
+                width: 280px;
+                height: 280px;
+            }
+        }
+
+        @media (max-width: 1024px) {
+            .horizontal-rubik-wheel {
+                width: 550px;
+                height: 340px;
+            }
+            .rubik-img {
+                width: 220px;
+                height: 220px;
+            }
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .hero-content h1 {
+                font-size: 3.5rem;
+            }
+            .sticky-nav-menu {
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .top-header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .contact-info {
+                justify-content: center;
+            }
+            .sticky-nav-menu {
+                display: none;
+            }
+            .sticky-nav-menu.active {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background: rgba(10,10,10,0.98);
+                padding: 1.5rem;
+                gap: 1rem;
+                z-index: 999;
+                text-align: center;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .sticky-nav-container {
+                justify-content: space-between;
+            }
+            .hero-content h1 {
+                font-size: 2.2rem;
+                letter-spacing: 3px;
+            }
+            .horizontal-rubik-wheel {
+                width: 340px;
+                height: 240px;
+            }
+            .rubik-img {
+                width: 130px;
+                height: 130px;
+            }
+            .rubik-slot.center-slot {
+                transform: translateX(-50%) scale(1.1);
+            }
+            .rubik-slot.left-slot,
+            .rubik-slot.right-slot {
+                transform: scale(0.7);
+            }
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            .rubik-collection-container {
+                flex-direction: column;
+            }
+            .vertical-nav {
+                flex-direction: row;
+            }
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            .social-links {
+                justify-content: center;
+            }
+            .logo-img {
+                height: 50px;
+            }
+            .rubik-group {
+                gap: 15px;
+                padding: 10px 15px;
+                min-width: 320px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Header: Contact Info -->
+    <div class="top-header">
+        <div class="top-header-container">
+            <div class="contact-info">
+                <a href="tel:+263242702853"><i class="fas fa-phone-alt"></i> +263242702853</a>
+                <a href="mailto:info@lizzytadie.store"><i class="fas fa-envelope"></i> info@lizzytadie.store</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Logo Section - Hidden on Scroll -->
+    <div class="logo-section" id="logoSection">
+        <div class="logo-container">
+            <div class="logo-wrapper">
+                <a href="#home">
+                    <img src="logos/elizabeth-tadiwa-logo-2.svg" 
+                         alt="Elizabeth Tadiwa Luxuries" 
+                         class="logo-img"
+                         onerror="this.onerror=null; this.parentElement.innerHTML='<span class=\'logo-fallback\'>ET</span><span class=\'brand-name\'>LUXURIES</span>';">
+                    <span class="brand-name">ELIZABETH TADIWA</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sticky Navigation Menu - Visible on Scroll, Centered -->
+    <nav class="sticky-nav" id="stickyNav">
+        <div class="sticky-nav-container">
+            <ul class="sticky-nav-menu" id="navMenu">
+                <li><a href="#home" class="sticky-nav-link">HOME</a></li>
+                <li><a href="#about" class="sticky-nav-link">ABOUT</a></li>
+                <li><a href="#collection" class="sticky-nav-link">COLLECTION</a></li>
+                <li><a href="#appointment" class="sticky-nav-link">APPOINTMENT</a></li>
+                <li><a href="#contact" class="sticky-nav-link">CONTACT</a></li>
+            </ul>
+            <div class="hamburger" id="hamburgerMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>STEP Into<br>LUXURY</h1>
+            <a href="#collection" class="hero-btn">DISCOVER MORE</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about-main">
+        <div class="about-container">
+            <h2 class="section-title">ELIZABETH TADIWA LUXURIES</h2>
+            <p class="about-text">Driven by a passion for fashion and a commitment to excellence, Elizabeth Tadiwa Luxuries offers discerning clientele an unparalleled shopping experience. Our dedicated team of style experts is here to assist you in finding the perfect ensemble for any occasion, ensuring that you not only look extraordinary but feel confident and empowered with every step you take.</p>
+            <a href="#about" class="btn btn-primary">READ MORE</a>
+        </div>
+    </section>
+
+    <!-- Appointment Promo -->
+    <section class="appointment-promo">
+        <div class="appointment-content">
+            <h2>MAKE AN APPOINTMENT</h2>
+            <a href="#appointment" class="btn btn-light">BOOK YOUR APPOINTMENT</a>
+        </div>
+    </section>
+
+    <!-- Collection Section - Rubik's Cube Style with LARGER IMAGES -->
+    <section id="collection" class="collection">
+        <div class="collection-header">
+            <h2 class="section-title">ET COLECTIONS</h2>
+            <p class="collection-subtitle">ELIZABETH TADIWA LUXURIES</p>
+        </div>
+        
+        <div class="rubik-collection-container">
+            <div class="vertical-nav">
+                <button class="vertical-arrow" id="verticalUpArrow">▲</button>
+            </div>
+            
+            <div class="rubik-main">
+                <div class="vertical-display" id="verticalDisplay"></div>
+                
+                <div class="product-info-panel">
+                    <div class="group-counter" id="groupCounter">Group 1 of 8</div>
+                    <p id="rubikSelectedName">Velvet Blazer</p>
+                    <p id="rubikSelectedPrice">$139.99</p>
+                    <a href="#" class="btn btn-primary">SELECT OPTIONS</a>
+                </div>
+                
+                <div class="picker-instructions">
+                    <p>▲▼ Navigate groups | ◀ ▶ Rotate images</p>
+                </div>
+            </div>
+            
+            <div class="vertical-nav">
+                <button class="vertical-arrow" id="verticalDownArrow">▼</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <h2 class="section-title">TESTIMONIALS</h2>
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Shopping at Elizabeth Tadiwa Luxuries was an absolute delight! From the moment I walked in, I felt like a VIP. The staff was incredibly attentive and helped me find the perfect outfit for my event. The quality of the clothing is exceptional, and I received countless compliments. Can't wait to visit again!"</p>
+                <h4 class="testimonial-author">SCOTT KUPA</h4>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"As a frequent traveler, I've had the opportunity to shop at luxury boutiques around the world, and Elizabeth Tadiwa Luxuries stands out as one of the best. The level of personalized service I received was unmatched, and the staff's expertise in understanding my style preferences was truly impressive."</p>
+                <h4 class="testimonial-author">SEH CALAZ</h4>
+            </div>
+            <div class="testimonial-card">
+                <p class="testimonial-text">"Elizabeth Tadiwa Luxuries is my go-to for finding unique and sophisticated pieces that elevate my wardrobe. The team's attention to detail and commitment to customer satisfaction always make for a memorable shopping experience. From the moment I step into the boutique, I'm greeted with warmth and professionalism."</p>
+                <h4 class="testimonial-author">EDD BRANSON</h4>
+            </div>
+        </div>
+    </section>
+
+    <!-- Appointment Section -->
+    <section id="appointment" class="appointment-section">
+        <h2>EMBRACE Your STYLE</h2>
+        <p>Schedule an appointment with our style experts</p>
+        <a href="#" class="btn btn-light">BOOK AN APPOINTMENT</a>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>QUICK LINKS</h3>
+                <ul>
+                    <li><a href="#home">HOME</a></li>
+                    <li><a href="#about">ABOUT</a></li>
+                    <li><a href="#collection">COLLECTION</a></li>
+                    <li><a href="#appointment">APPOINTMENT</a></li>
+                    <li><a href="#contact">CONTACT</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>CONTACT</h3>
+                <p><i class="fas fa-phone"></i> <a href="tel:+263242702853">+263242702853</a></p>
+                <p><i class="fas fa-envelope"></i> <a href="mailto:info@lizzytadie.store">info@lizzytadie.store</a></p>
+            </div>
+            <div class="footer-section">
+                <h3>FOLLOW US</h3>
+                <div class="social-links">
+                    <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026, Elizabeth Tadiwa Luxuries. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Product Data for 24 images
+        const products = [];
+        for (let i = 1; i <= 24; i++) {
+            let price;
+            if (i <= 8) price = (49.99 + (i * 8)).toFixed(2);
+            else if (i <= 16) price = (89.99 + ((i-8) * 10)).toFixed(2);
+            else price = (149.99 + ((i-16) * 12)).toFixed(2);
+            
+            const categories = [
+                "Signature Sneakers", "Premium Slides", "Designer Socks", "Elite Snapback",
+                "Luxury Bottle", "Cashmere Beanie", "Exclusive Boots", "Platinum Slides",
+                "Silk Scarf", "Leather Wallet", "Gold Watch", "Diamond Ring",
+                "Velvet Blazer", "Silk Tie", "Leather Belt", "Aviator Sunglasses",
+                "Crystal Cufflinks", "Leather Gloves", "Cashmere Scarf", "Silver Necklace",
+                "Designer Bag", "Luxury Pen", "Leather Journal", "Premium Candle"
+            ];
+            
+            products.push({
+                id: i,
+                name: categories[(i - 1) % categories.length],
+                price: `$${price}`,
+                image: `images/${i}.jpg`
+            });
+        }
+
+        const GROUP_SIZE = 3;
+        let groups = [];
+        
+        for (let i = 0; i < products.length; i += GROUP_SIZE) {
+            groups.push({
+                groupIndex: groups.length,
+                products: products.slice(i, i + GROUP_SIZE),
+                currentFocusIndex: 0
+            });
+        }
+
+        let activeGroupIdx = 0;
+        let verticalDisplay;
+
+        function updateSelectedDisplay() {
+            const group = groups[activeGroupIdx];
+            if (group && group.products[group.currentFocusIndex]) {
+                const product = group.products[group.currentFocusIndex];
+                document.getElementById('rubikSelectedName').innerHTML = product.name;
+                document.getElementById('rubikSelectedPrice').innerHTML = product.price;
+            }
+        }
+        
+        function updateGroupCounter() {
+            const counter = document.getElementById('groupCounter');
+            if (counter) {
+                counter.innerHTML = `Group ${activeGroupIdx + 1} of ${groups.length}`;
+            }
+        }
+
+        function renderGroupRow(groupData, groupIdx, isActive) {
+            const rowDiv = document.createElement('div');
+            rowDiv.className = 'rubik-group';
+            if (isActive) rowDiv.classList.add('active-vertical');
+            rowDiv.setAttribute('data-group-idx', groupIdx);
+
+            const leftArrow = document.createElement('button');
+            leftArrow.className = 'rubik-arrow';
+            leftArrow.innerHTML = '◀';
+
+            const wheelDiv = document.createElement('div');
+            wheelDiv.className = 'horizontal-rubik-wheel';
+
+            const rightArrow = document.createElement('button');
+            rightArrow.className = 'rubik-arrow';
+            rightArrow.innerHTML = '▶';
+
+            function refreshWheel() {
+                wheelDiv.innerHTML = '';
+                const productsArray = groupData.products;
+                const focusIdx = groupData.currentFocusIndex;
+
+                if (productsArray.length === 0) return;
+
+                const leftProduct = productsArray[(focusIdx - 1 + productsArray.length) % productsArray.length];
+                const centerProduct = productsArray[focusIdx];
+                const rightProduct = productsArray[(focusIdx + 1) % productsArray.length];
+
+                const leftSlot = document.createElement('div');
+                leftSlot.className = 'rubik-slot left-slot';
+                const leftImg = document.createElement('img');
+                leftImg.src = leftProduct.image;
+                leftImg.alt = leftProduct.name;
+                leftImg.className = 'rubik-img';
+                leftImg.onerror = function() { this.src = 'https://via.placeholder.com/350x350?text=' + leftProduct.name; };
+                leftSlot.appendChild(leftImg);
+                leftSlot.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    rotateGroupHorizontal(groupIdx, 'left');
+                });
+
+                const centerSlot = document.createElement('div');
+                centerSlot.className = 'rubik-slot center-slot';
+                const centerImg = document.createElement('img');
+                centerImg.src = centerProduct.image;
+                centerImg.alt = centerProduct.name;
+                centerImg.className = 'rubik-img';
+                centerImg.onerror = function() { this.src = 'https://via.placeholder.com/350x350?text=' + centerProduct.name; };
+                centerSlot.appendChild(centerImg);
+
+                const rightSlot = document.createElement('div');
+                rightSlot.className = 'rubik-slot right-slot';
+                const rightImg = document.createElement('img');
+                rightImg.src = rightProduct.image;
+                rightImg.alt = rightProduct.name;
+                rightImg.className = 'rubik-img';
+                rightImg.onerror = function() { this.src = 'https://via.placeholder.com/350x350?text=' + rightProduct.name; };
+                rightSlot.appendChild(rightImg);
+                rightSlot.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    rotateGroupHorizontal(groupIdx, 'right');
+                });
+
+                wheelDiv.appendChild(leftSlot);
+                wheelDiv.appendChild(centerSlot);
+                wheelDiv.appendChild(rightSlot);
+            }
+
+            function rotateGroupHorizontal(groupIdx, direction) {
+                const grp = groups[groupIdx];
+                if (!grp || grp.products.length === 0) return;
+                let newFocus = grp.currentFocusIndex;
+                if (direction === 'left') {
+                    newFocus = (grp.currentFocusIndex - 1 + grp.products.length) % grp.products.length;
+                } else if (direction === 'right') {
+                    newFocus = (grp.currentFocusIndex + 1) % grp.products.length;
+                }
+                if (newFocus !== grp.currentFocusIndex) {
+                    grp.currentFocusIndex = newFocus;
+                    refreshWheel();
+                    if (groupIdx === activeGroupIdx) {
+                        updateSelectedDisplay();
+                    }
+                }
+            }
+
+            leftArrow.addEventListener('click', (e) => {
+                e.stopPropagation();
+                rotateGroupHorizontal(groupIdx, 'left');
+            });
+
+            rightArrow.addEventListener('click', (e) => {
+                e.stopPropagation();
+                rotateGroupHorizontal(groupIdx, 'right');
+            });
+
+            refreshWheel();
+
+            rowDiv.appendChild(leftArrow);
+            rowDiv.appendChild(wheelDiv);
+            rowDiv.appendChild(rightArrow);
+
+            return rowDiv;
+        }
+
+        function renderActiveGroup() {
+            if (!verticalDisplay) verticalDisplay = document.getElementById('verticalDisplay');
+            verticalDisplay.innerHTML = '';
+
+            groups.forEach((group, idx) => {
+                if (idx === activeGroupIdx) {
+                    const rowElement = renderGroupRow(group, idx, true);
+                    verticalDisplay.appendChild(rowElement);
+                }
+            });
+
+            updateSelectedDisplay();
+            updateGroupCounter();
+        }
+
+        function nextGroup() {
+            activeGroupIdx = (activeGroupIdx + 1) % groups.length;
+            renderActiveGroup();
+        }
+
+        function prevGroup() {
+            activeGroupIdx = (activeGroupIdx - 1 + groups.length) % groups.length;
+            renderActiveGroup();
+        }
+
+        function setupVerticalArrows() {
+            const upArrow = document.getElementById('verticalUpArrow');
+            const downArrow = document.getElementById('verticalDownArrow');
+            
+            if (upArrow) upArrow.addEventListener('click', () => prevGroup());
+            if (downArrow) downArrow.addEventListener('click', () => nextGroup());
+        }
+
+        function initRubikCollection() {
+            renderActiveGroup();
+            setupVerticalArrows();
+        }
+
+        // Scroll effect - Hide logo section when scrolling down
+        const logoSection = document.getElementById('logoSection');
+        
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > 50) {
+                logoSection.classList.add('hide-logo');
+            } else {
+                logoSection.classList.remove('hide-logo');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const hamburger = document.getElementById('hamburgerMenu');
+        const navMenu = document.getElementById('navMenu');
+        
+        if (hamburger) {
+            hamburger.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+            });
+        }
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                    if (navMenu && navMenu.classList && navMenu.classList.contains('active')) {
+                        navMenu.classList.remove('active');
+                    }
+                }
+            });
+        });
+
+        initRubikCollection();
+    </script>
+</body>
+</html>

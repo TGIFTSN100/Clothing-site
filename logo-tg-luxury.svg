@@ -1,0 +1,46 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Outer Gold Circle -->
+  <circle cx="100" cy="100" r="95" fill="none" stroke="#d4af37" stroke-width="2"/>
+  
+  <!-- Inner Black Circle -->
+  <circle cx="100" cy="100" r="90" fill="none" stroke="#000" stroke-width="1.5"/>
+  
+  <!-- Gold Background -->
+  <defs>
+    <linearGradient id="goldGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#d4af37;stop-opacity:1" />
+    </linearGradient>
+    
+    <linearGradient id="blackGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1a1a1a;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#000;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Main Logo Box -->
+  <rect x="35" y="35" width="130" height="130" fill="url(#blackGradient)" stroke="#d4af37" stroke-width="2" rx="8"/>
+  
+  <!-- Gold Accent Lines -->
+  <line x1="45" y1="45" x2="155" y2="45" stroke="#d4af37" stroke-width="1.5"/>
+  <line x1="45" y1="155" x2="155" y2="155" stroke="#d4af37" stroke-width="1.5"/>
+  
+  <!-- Letter T -->
+  <g>
+    <text x="65" y="130" font-family="Georgia, serif" font-size="70" font-weight="bold" fill="#d4af37" letter-spacing="2">T</text>
+  </g>
+  
+  <!-- Letter G -->
+  <g>
+    <text x="105" y="130" font-family="Georgia, serif" font-size="70" font-weight="bold" fill="#d4af37" letter-spacing="2">G</text>
+  </g>
+  
+  <!-- Luxury Tagline -->
+  <text x="100" y="160" font-family="Georgia, serif" font-size="10" font-weight="bold" fill="#d4af37" text-anchor="middle" letter-spacing="3">LUXURY</text>
+  
+  <!-- Decorative Corner Elements -->
+  <circle cx="45" cy="45" r="3" fill="#d4af37"/>
+  <circle cx="155" cy="45" r="3" fill="#d4af37"/>
+  <circle cx="45" cy="155" r="3" fill="#d4af37"/>
+  <circle cx="155" cy="155" r="3" fill="#d4af37"/>
+</svg>

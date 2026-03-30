@@ -1,0 +1,122 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Unisex Sneakers",
+      "price": 199.99,
+      "image": "unisex-sneakers.jpg",
+      "description": "Premium quality unisex sneakers with superior comfort",
+      "category": "Footwear",
+      "inStock": true,
+      "variants": ["Size 7", "Size 8", "Size 9", "Size 10", "Size 11", "Size 12"]
+    },
+    {
+      "id": 2,
+      "name": "Slides",
+      "price": 89.99,
+      "image": "slides.jpg",
+      "description": "Comfortable casual slides perfect for everyday wear",
+      "category": "Footwear",
+      "inStock": true,
+      "variants": ["Size 6", "Size 7", "Size 8", "Size 9", "Size 10", "Size 11"]
+    },
+    {
+      "id": 3,
+      "name": "Socks",
+      "price": 29.99,
+      "image": "socks.jpg",
+      "description": "Premium cotton socks with superior comfort and durability",
+      "category": "Accessories",
+      "inStock": true,
+      "variants": ["One Size"]
+    },
+    {
+      "id": 4,
+      "name": "Snap Back",
+      "price": 49.99,
+      "image": "snap-back.jpg",
+      "description": "Classic snap back cap for style and sun protection",
+      "category": "Headwear",
+      "inStock": true,
+      "variants": ["One Size"]
+    },
+    {
+      "id": 5,
+      "name": "Insulated Bottle",
+      "price": 39.99,
+      "image": "insulated-bottle.jpg",
+      "description": "Double-walled insulated bottle keeps drinks hot or cold",
+      "category": "Accessories",
+      "inStock": true,
+      "variants": ["500ml", "750ml", "1000ml"]
+    },
+    {
+      "id": 6,
+      "name": "Beenie",
+      "price": 59.99,
+      "image": "beenie.jpg",
+      "description": "Warm and comfortable beenie for cold weather",
+      "category": "Headwear",
+      "inStock": true,
+      "variants": ["Black", "Gray", "Navy", "Charcoal"]
+    },
+    {
+      "id": 7,
+      "name": "High Boots",
+      "price": 249.99,
+      "image": "high-boots.jpg",
+      "description": "Stylish high boots with premium leather construction",
+      "category": "Footwear",
+      "inStock": true,
+      "variants": ["Size 5", "Size 6", "Size 7", "Size 8", "Size 9", "Size 10"]
+    },
+    {
+      "id": 8,
+      "name": "Slides Premium",
+      "price": 119.99,
+      "image": "slides-2.jpg",
+      "description": "Premium slides with exclusive design",
+      "category": "Footwear",
+      "inStock": true,
+      "variants": ["Size 6", "Size 7", "Size 8", "Size 9", "Size 10", "Size 11"]
+    }
+  ],
+  "testimonials": [
+    {
+      "id": 1,
+      "author": "SCOTT KUPA",
+      "rating": 5,
+      "text": "Shopping at Mudiwa Hood Luxury Boutique was an absolute delight! From the moment I walked in, I felt like a VIP. The staff was incredibly attentive and helped me find the perfect outfit for my event. The quality of the clothing is exceptional, and I received countless compliments. Can't wait to visit again!"
+    },
+    {
+      "id": 2,
+      "author": "SEH CALAZ",
+      "rating": 5,
+      "text": "As a frequent traveler, I've had the opportunity to shop at luxury boutiques around the world, and Mudiwa Hood Luxury Boutique stands out as one of the best. The level of personalized service I received was unmatched, and the staff's expertise in understanding my style preferences was truly impressive."
+    },
+    {
+      "id": 3,
+      "author": "EDD BRANSON",
+      "rating": 5,
+      "text": "Mudiwa Hood Luxury Boutique is my go-to for finding unique and sophisticated pieces that elevate my wardrobe. The team's attention to detail and commitment to customer satisfaction always make for a memorable shopping experience. From the moment I step into the boutique, I'm greeted with warmth and professionalism."
+    }
+  ],
+  "contact": {
+    "phone": "0789795764",
+    "email": "info@takudzwagift.store",
+    "address": "Luxury Fashion District",
+    "city": "Zimbabwe"
+  },
+  "social": {
+    "twitter": "https://twitter.com/takudzwagift",
+    "facebook": "https://www.facebook.com/takudzwagift",
+    "instagram": "https://www.instagram.com/takudzwagift/"
+  },
+  "company": {
+    "name": "Takudzwa Gift Luxury Boutique",
+    "tagline": "Crafted for Distinction",
+    "description": "Driven by a passion for fashion and a commitment to excellence, Takudzwa Gift Store offers discerning clientele an unparalleled shopping experience.",
+    "founded": 2024,
+    "copyright": "© 2026, Takudzwa Gift Luxury Boutique. All Rights Reserved."
+  }
+}

@@ -1,0 +1,22 @@
+<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="200" height="200" fill="#f0e6d2"/>
+  
+  <!-- Art Deco Geometric Pattern -->
+  <polygon points="100,40 140,70 140,130 100,160 60,130 60,70" fill="none" stroke="#1a1a1a" stroke-width="2.5"/>
+  
+  <!-- Inner Art Deco Lines -->
+  <line x1="70" y1="80" x2="130" y2="80" stroke="#1a1a1a" stroke-width="1.5"/>
+  <line x1="70" y1="100" x2="130" y2="100" stroke="#1a1a1a" stroke-width="1.5"/>
+  <line x1="70" y1="120" x2="130" y2="120" stroke="#1a1a1a" stroke-width="1.5"/>
+  
+  <!-- Vertical Accent -->
+  <line x1="100" y1="70" x2="100" y2="150" stroke="#1a1a1a" stroke-width="2" opacity="0.6"/>
+  
+  <!-- Fashion Elements - Small Triangles -->
+  <polygon points="85,75 90,85 80,85" fill="#1a1a1a"/>
+  <polygon points="120,75 125,85 115,85" fill="#1a1a1a"/>
+  
+  <!-- Text -->
+  <text x="100" y="175" font-family="Georgia, serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#1a1a1a" letter-spacing="2">EMB FASHION</text>
+</svg>
