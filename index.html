@@ -1607,14 +1607,48 @@
         }
 
         const websiteViewCountElement = document.getElementById('websiteViewCount');
-        const websiteViewStorageKey = 'etl_website_view_count';
+        const websiteLastCountedAtKey = 'etl_website_last_counted_at';
+        const websiteCachedCountKey = 'etl_website_cached_global_count';
+        const websiteCounterNamespace = 'et-luxuries-site';
+        const websiteCounterKey = 'view-count';
+        const oneDayInMs = 24 * 60 * 60 * 1000;
 
-        if (websiteViewCountElement) {
-            const storedViews = parseInt(localStorage.getItem(websiteViewStorageKey) || '0', 10);
-            const updatedViews = Number.isNaN(storedViews) ? 1 : storedViews + 1;
-            localStorage.setItem(websiteViewStorageKey, String(updatedViews));
-            websiteViewCountElement.textContent = updatedViews.toLocaleString();
+        function setWebsiteViewCount(value) {
+            if (!websiteViewCountElement) return;
+            websiteViewCountElement.textContent = Number(value).toLocaleString();
         }
+
+        async function syncWebsiteViewCount() {
+            if (!websiteViewCountElement) return;
+
+            const now = Date.now();
+            const lastCountedAt = parseInt(localStorage.getItem(websiteLastCountedAtKey) || '0', 10);
+            const shouldIncrement = Number.isNaN(lastCountedAt) || now - lastCountedAt >= oneDayInMs;
+            const action = shouldIncrement ? 'hit' : 'get';
+            const url = `https://api.countapi.xyz/${action}/${websiteCounterNamespace}/${websiteCounterKey}`;
+
+            try {
+                const response = await fetch(url, { cache: 'no-store' });
+                if (!response.ok) throw new Error('Counter request failed');
+
+                const data = await response.json();
+                if (typeof data.value === 'number') {
+                    setWebsiteViewCount(data.value);
+                    localStorage.setItem(websiteCachedCountKey, String(data.value));
+                }
+
+                if (shouldIncrement) {
+                    localStorage.setItem(websiteLastCountedAtKey, String(now));
+                }
+            } catch (error) {
+                const cachedCount = parseInt(localStorage.getItem(websiteCachedCountKey) || '0', 10);
+                if (!Number.isNaN(cachedCount) && cachedCount > 0) {
+                    setWebsiteViewCount(cachedCount);
+                }
+            }
+        }
+
+        syncWebsiteViewCount();
 
         initRubikCollection();
     </script>
