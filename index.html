@@ -509,11 +509,14 @@
         .rubik-slot.right-slot {
             opacity: 0.3;
             filter: blur(1.5px) brightness(0.5);
-            transform: scale(0.85);
-            right: 0%;
-            left: auto;
-            transform: translateX(0%) scale(0.85);
+            left: 100%;
+            transform: translateX(-100%) scale(0.85);
             z-index: 5;
+        }
+
+        .rubik-slot.hidden-slot {
+            opacity: 0;
+            pointer-events: none;
         }
 
         /* ENLARGED IMAGE STYLES */
@@ -1300,72 +1303,104 @@
             rightArrow.className = 'rubik-arrow';
             rightArrow.innerHTML = '▶';
 
+            let slotElements = [];
+            let isWheelAnimating = false;
+
+            function applyFocusClasses(focusIdx) {
+                const productsArray = groupData.products;
+                const productCount = productsArray.length;
+
+                slotElements.forEach((slot, productIdx) => {
+                    slot.className = 'rubik-slot';
+
+                    if (productIdx === focusIdx) {
+                        slot.classList.add('center-slot');
+                    } else if (productIdx === (focusIdx - 1 + productCount) % productCount) {
+                        slot.classList.add('left-slot');
+                    } else if (productIdx === (focusIdx + 1) % productCount) {
+                        slot.classList.add('right-slot');
+                    } else {
+                        slot.classList.add('hidden-slot');
+                    }
+                });
+            }
+
             function refreshWheel() {
                 wheelDiv.innerHTML = '';
                 const productsArray = groupData.products;
-                const focusIdx = groupData.currentFocusIndex;
 
                 if (productsArray.length === 0) return;
 
-                const leftProduct = productsArray[(focusIdx - 1 + productsArray.length) % productsArray.length];
-                const centerProduct = productsArray[focusIdx];
-                const rightProduct = productsArray[(focusIdx + 1) % productsArray.length];
+                slotElements = productsArray.map((product, productIdx) => {
+                    const slot = document.createElement('div');
+                    slot.className = 'rubik-slot';
 
-                const leftSlot = document.createElement('div');
-                leftSlot.className = 'rubik-slot left-slot';
-                const leftImg = document.createElement('img');
-                leftImg.src = leftProduct.image;
-                leftImg.alt = leftProduct.name;
-                leftImg.className = 'rubik-img';
-                leftImg.onerror = function() { this.src = getLocalImageFallback(leftProduct.name); };
-                leftSlot.appendChild(leftImg);
-                leftSlot.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    rotateGroupHorizontal(groupIdx, 'left');
+                    const img = document.createElement('img');
+                    img.src = product.image;
+                    img.alt = product.name;
+                    img.className = 'rubik-img';
+                    img.onerror = function() { this.src = getLocalImageFallback(product.name); };
+
+                    slot.appendChild(img);
+                    slot.setAttribute('data-product-idx', productIdx);
+                    slot.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        if (slot.classList.contains('left-slot')) {
+                            rotateGroupHorizontal(groupIdx, 'left');
+                        } else if (slot.classList.contains('right-slot')) {
+                            rotateGroupHorizontal(groupIdx, 'right');
+                        }
+                    });
+
+                    wheelDiv.appendChild(slot);
+                    return slot;
                 });
 
-                const centerSlot = document.createElement('div');
-                centerSlot.className = 'rubik-slot center-slot';
-                const centerImg = document.createElement('img');
-                centerImg.src = centerProduct.image;
-                centerImg.alt = centerProduct.name;
-                centerImg.className = 'rubik-img';
-                centerImg.onerror = function() { this.src = getLocalImageFallback(centerProduct.name); };
-                centerSlot.appendChild(centerImg);
-
-                const rightSlot = document.createElement('div');
-                rightSlot.className = 'rubik-slot right-slot';
-                const rightImg = document.createElement('img');
-                rightImg.src = rightProduct.image;
-                rightImg.alt = rightProduct.name;
-                rightImg.className = 'rubik-img';
-                rightImg.onerror = function() { this.src = getLocalImageFallback(rightProduct.name); };
-                rightSlot.appendChild(rightImg);
-                rightSlot.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    rotateGroupHorizontal(groupIdx, 'right');
-                });
-
-                wheelDiv.appendChild(leftSlot);
-                wheelDiv.appendChild(centerSlot);
-                wheelDiv.appendChild(rightSlot);
+                applyFocusClasses(groupData.currentFocusIndex);
             }
 
             function rotateGroupHorizontal(groupIdx, direction) {
                 const grp = groups[groupIdx];
                 if (!grp || grp.products.length === 0) return;
+                if (isWheelAnimating) return;
+
                 let newFocus = grp.currentFocusIndex;
                 if (direction === 'left') {
                     newFocus = (grp.currentFocusIndex - 1 + grp.products.length) % grp.products.length;
                 } else if (direction === 'right') {
                     newFocus = (grp.currentFocusIndex + 1) % grp.products.length;
                 }
+
                 if (newFocus !== grp.currentFocusIndex) {
-                    grp.currentFocusIndex = newFocus;
-                    refreshWheel();
-                    if (groupIdx === activeGroupIdx) {
-                        updateSelectedDisplay();
+                    isWheelAnimating = true;
+
+                    const leftSlot = wheelDiv.querySelector('.left-slot');
+                    const centerSlot = wheelDiv.querySelector('.center-slot');
+                    const rightSlot = wheelDiv.querySelector('.right-slot');
+
+                    if (leftSlot && centerSlot && rightSlot && grp.products.length === 3) {
+                        if (direction === 'left') {
+                            leftSlot.className = 'rubik-slot center-slot';
+                            centerSlot.className = 'rubik-slot right-slot';
+                            rightSlot.className = 'rubik-slot left-slot';
+                        } else {
+                            rightSlot.className = 'rubik-slot center-slot';
+                            centerSlot.className = 'rubik-slot left-slot';
+                            leftSlot.className = 'rubik-slot right-slot';
+                        }
+                    } else {
+                        applyFocusClasses(newFocus);
                     }
+
+                    grp.currentFocusIndex = newFocus;
+
+                    setTimeout(() => {
+                        applyFocusClasses(grp.currentFocusIndex);
+                        if (groupIdx === activeGroupIdx) {
+                            updateSelectedDisplay();
+                        }
+                        isWheelAnimating = false;
+                    }, 420);
                 }
             }
 
