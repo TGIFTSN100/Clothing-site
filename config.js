@@ -34,7 +34,7 @@ const SiteConfig = {
   // CONTACT INFORMATION
   // ============================================
   contact: {
-    phone: "0789795764",
+    phone: "+263789795764",
     email: "info@takudzwagift.store",
     address: "Luxury Fashion District",
     city: "Zimbabwe"
