@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Elizabeth Tadiwa | Elizabeth Tadiwa Luxuries</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+    <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
     <style>
         * {
             margin: 0;
@@ -185,7 +187,7 @@
         .hero {
             height: 100vh;
             min-height: 700px;
-            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=1600') center/cover;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)), url('images/1.jpg') center/cover;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -652,6 +654,82 @@
             opacity: 0.9;
         }
 
+        .order-popup-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.65);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+            padding: 1.5rem;
+        }
+
+        .order-popup-overlay.active {
+            display: flex;
+        }
+
+        .order-popup {
+            width: min(420px, 100%);
+            background: #101010;
+            color: #fff;
+            border: 1px solid rgba(212, 175, 55, 0.5);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.45);
+        }
+
+        .order-popup h3 {
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            margin-bottom: 0.6rem;
+            text-transform: uppercase;
+        }
+
+        .order-popup p {
+            color: #d6d6d6;
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+        }
+
+        .order-popup-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .order-popup-links a {
+            text-decoration: none;
+            text-align: center;
+            background: #d4af37;
+            color: #111;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            transition: transform 0.2s ease, filter 0.2s ease;
+        }
+
+        .order-popup-links a:hover {
+            filter: brightness(1.08);
+            transform: translateY(-1px);
+        }
+
+        .order-popup-close {
+            margin-top: 1rem;
+            width: 100%;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            background: transparent;
+            color: #fff;
+            padding: 0.65rem;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .order-popup-close:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+
         /* Footer */
         .footer {
             background: #0f1a1a;
@@ -998,7 +1076,7 @@
     <section class="appointment-promo">
         <div class="appointment-content">
             <h2>MAKE AN APPOINTMENT</h2>
-            <a href="#appointment" class="btn btn-light">MAKE AN ORDER</a>
+            <a href="#" class="btn btn-light order-popup-trigger">MAKE AN ORDER</a>
         </div>
     </section>
 
@@ -1059,8 +1137,20 @@
     <section id="appointment" class="appointment-section">
         <h2>EMBRACE Your STYLE</h2>
         <p>Schedule an appointment with our style experts</p>
-        <a href="#" class="btn btn-light">MAKE AN ORDER</a>
+        <a href="#" class="btn btn-light order-popup-trigger">MAKE AN ORDER</a>
     </section>
+
+    <div id="orderPopupOverlay" class="order-popup-overlay" aria-hidden="true">
+        <div class="order-popup" role="dialog" aria-modal="true" aria-labelledby="orderPopupTitle">
+            <h3 id="orderPopupTitle">Choose WhatsApp Action</h3>
+            <p>Select one of the options below.</p>
+            <div class="order-popup-links">
+                <a href="https://wa.me/qr/Y5WQRJIFDRIIC1" target="_blank" rel="noopener noreferrer">contact supplier</a>
+                <a href="https://chat.whatsapp.com/E3dGO2lYv5vCkooFUIZMKj?mode=gi_t" target="_blank" rel="noopener noreferrer">follow us</a>
+            </div>
+            <button id="orderPopupClose" class="order-popup-close" type="button">Close</button>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer id="contact" class="footer">
@@ -1150,6 +1240,11 @@
             }
         }
 
+        function getLocalImageFallback(productName) {
+            const safeName = encodeURIComponent(productName || 'Product');
+            return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='700' height='700' viewBox='0 0 700 700'%3E%3Crect width='700' height='700' fill='%23efe7da'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='36' fill='%231e2a2a'%3E${safeName}%3C/text%3E%3C/svg%3E`;
+        }
+
         function renderGroupRow(groupData, groupIdx, isActive) {
             const rowDiv = document.createElement('div');
             rowDiv.className = 'rubik-group';
@@ -1184,7 +1279,7 @@
                 leftImg.src = leftProduct.image;
                 leftImg.alt = leftProduct.name;
                 leftImg.className = 'rubik-img';
-                leftImg.onerror = function() { this.src = 'https://via.placeholder.com/350x350?text=' + leftProduct.name; };
+                leftImg.onerror = function() { this.src = getLocalImageFallback(leftProduct.name); };
                 leftSlot.appendChild(leftImg);
                 leftSlot.addEventListener('click', (e) => {
                     e.stopPropagation();
@@ -1197,7 +1292,7 @@
                 centerImg.src = centerProduct.image;
                 centerImg.alt = centerProduct.name;
                 centerImg.className = 'rubik-img';
-                centerImg.onerror = function() { this.src = 'https://via.placeholder.com/350x350?text=' + centerProduct.name; };
+                centerImg.onerror = function() { this.src = getLocalImageFallback(centerProduct.name); };
                 centerSlot.appendChild(centerImg);
 
                 const rightSlot = document.createElement('div');
@@ -1206,7 +1301,7 @@
                 rightImg.src = rightProduct.image;
                 rightImg.alt = rightProduct.name;
                 rightImg.className = 'rubik-img';
-                rightImg.onerror = function() { this.src = 'https://via.placeholder.com/350x350?text=' + rightProduct.name; };
+                rightImg.onerror = function() { this.src = getLocalImageFallback(rightProduct.name); };
                 rightSlot.appendChild(rightImg);
                 rightSlot.addEventListener('click', (e) => {
                     e.stopPropagation();
@@ -1318,8 +1413,12 @@
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') {
+                    return;
+                }
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
+                const target = document.querySelector(targetId);
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth' });
                     if (navMenu && navMenu.classList && navMenu.classList.contains('active')) {
@@ -1327,6 +1426,47 @@
                     }
                 }
             });
+        });
+
+        const orderPopupOverlay = document.getElementById('orderPopupOverlay');
+        const orderPopupClose = document.getElementById('orderPopupClose');
+        const orderPopupTriggers = document.querySelectorAll('.order-popup-trigger');
+
+        function closeOrderPopup() {
+            if (!orderPopupOverlay) return;
+            orderPopupOverlay.classList.remove('active');
+            orderPopupOverlay.setAttribute('aria-hidden', 'true');
+        }
+
+        function openOrderPopup() {
+            if (!orderPopupOverlay) return;
+            orderPopupOverlay.classList.add('active');
+            orderPopupOverlay.setAttribute('aria-hidden', 'false');
+        }
+
+        orderPopupTriggers.forEach((trigger) => {
+            trigger.addEventListener('click', function(event) {
+                event.preventDefault();
+                openOrderPopup();
+            });
+        });
+
+        if (orderPopupClose) {
+            orderPopupClose.addEventListener('click', closeOrderPopup);
+        }
+
+        if (orderPopupOverlay) {
+            orderPopupOverlay.addEventListener('click', function(event) {
+                if (event.target === orderPopupOverlay) {
+                    closeOrderPopup();
+                }
+            });
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeOrderPopup();
+            }
         });
 
         initRubikCollection();
