@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ET Collections | Select Products</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Montserrat', 'Poppins', 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background:
+                radial-gradient(circle at 15% 10%, rgba(212, 175, 55, 0.2), transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(30, 42, 42, 0.15), transparent 45%),
+                linear-gradient(160deg, #fbf7ef 0%, #f2e9dc 100%);
+            color: #1e2a2a;
+            padding-bottom: 120px;
+        }
+
+        .top-bar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(12, 12, 12, 0.94);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.35);
+            padding: 0.9rem 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .top-bar a {
+            color: #f6f0e3;
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+        }
+
+        .selected-count {
+            color: #d4af37;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .page-header {
+            max-width: 1200px;
+            margin: 1.6rem auto 0.7rem;
+            padding: 0 1rem;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: clamp(1.6rem, 5vw, 2.4rem);
+            letter-spacing: 1px;
+            margin-bottom: 0.45rem;
+        }
+
+        .page-header p {
+            color: #4b5252;
+            font-size: 0.95rem;
+        }
+
+        .products-grid {
+            max-width: 1200px;
+            margin: 1.2rem auto;
+            padding: 0 1rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+            gap: 1rem;
+        }
+
+        .product-card {
+            background: #fff;
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 14px 28px rgba(0, 0, 0, 0.12);
+        }
+
+        .product-card.selected {
+            border-color: #d4af37;
+            box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.35), 0 14px 28px rgba(0, 0, 0, 0.12);
+        }
+
+        .product-image-wrap {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            background: #f2ebdf;
+            overflow: hidden;
+        }
+
+        .product-image-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .product-body {
+            padding: 0.8rem 0.9rem 1rem;
+        }
+
+        .product-title {
+            font-size: 1rem;
+            margin-bottom: 0.2rem;
+            min-height: 2.4em;
+        }
+
+        .product-price {
+            color: #b79226;
+            font-weight: 700;
+        }
+
+        .product-check {
+            margin-top: 0.55rem;
+            display: flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-size: 0.86rem;
+            color: #2e3535;
+        }
+
+        .contact-bar {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 80;
+            background: rgba(12, 12, 12, 0.96);
+            border-top: 1px solid rgba(212, 175, 55, 0.35);
+            padding: 0.85rem 1rem calc(0.85rem + env(safe-area-inset-bottom));
+        }
+
+        .contact-wrap {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        #contactSupplierBtn {
+            width: 100%;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #d4af37 0%, #f3cc5a 100%);
+            color: #1e2a2a;
+            font-weight: 800;
+            letter-spacing: 0.8px;
+            padding: 0.95rem 1rem;
+            cursor: pointer;
+            transition: filter 0.2s ease, transform 0.2s ease;
+        }
+
+        #contactSupplierBtn:hover {
+            filter: brightness(1.05);
+            transform: translateY(-1px);
+        }
+
+        #contactSupplierBtn:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+            transform: none;
+            filter: none;
+        }
+
+        .helper-text {
+            color: #c9c2b6;
+            font-size: 0.8rem;
+            min-width: 155px;
+            text-align: right;
+        }
+
+        @media (max-width: 640px) {
+            .contact-wrap {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .helper-text {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="top-bar">
+        <a href="index.html">&larr; Back to Home</a>
+        <div id="selectedCount" class="selected-count">0 selected</div>
+    </header>
+
+    <section class="page-header">
+        <h1>All Collections</h1>
+        <p>Select one or more products, then contact supplier on WhatsApp.</p>
+    </section>
+
+    <main id="productsGrid" class="products-grid" aria-live="polite"></main>
+
+    <footer class="contact-bar">
+        <div class="contact-wrap">
+            <button id="contactSupplierBtn" type="button" disabled>CONTACT SUPPLIER</button>
+            <div class="helper-text">Select at least 1 product</div>
+        </div>
+    </footer>
+
+    <script>
+        const categories = [
+            'Signature Sneakers', 'Premium Slides', 'Designer Socks', 'Elite Snapback',
+            'Luxury Bottle', 'Cashmere Beanie', 'Exclusive Boots', 'Platinum Slides',
+            'Silk Scarf', 'Leather Wallet', 'Gold Watch', 'Diamond Ring',
+            'Velvet Blazer', 'Silk Tie', 'Leather Belt', 'Aviator Sunglasses',
+            'Crystal Cufflinks', 'Leather Gloves', 'Cashmere Scarf', 'Silver Necklace',
+            'Designer Bag', 'Luxury Pen', 'Leather Journal', 'Premium Candle'
+        ];
+
+        const products = [];
+        for (let i = 1; i <= 24; i++) {
+            let price;
+            if (i <= 8) price = (49.99 + (i * 8)).toFixed(2);
+            else if (i <= 16) price = (89.99 + ((i - 8) * 10)).toFixed(2);
+            else price = (149.99 + ((i - 16) * 12)).toFixed(2);
+
+            products.push({
+                id: i,
+                name: categories[(i - 1) % categories.length],
+                price: `$${price}`,
+                image: `images/${i}.jpg`
+            });
+        }
+
+        const selectedProductIds = new Set();
+        const productsGrid = document.getElementById('productsGrid');
+        const selectedCount = document.getElementById('selectedCount');
+        const contactSupplierBtn = document.getElementById('contactSupplierBtn');
+
+        function updateSelectionUI() {
+            const count = selectedProductIds.size;
+            selectedCount.textContent = `${count} selected`;
+            contactSupplierBtn.disabled = count === 0;
+        }
+
+        function toggleProduct(productId, card, checkbox) {
+            if (selectedProductIds.has(productId)) {
+                selectedProductIds.delete(productId);
+                card.classList.remove('selected');
+                checkbox.checked = false;
+            } else {
+                selectedProductIds.add(productId);
+                card.classList.add('selected');
+                checkbox.checked = true;
+            }
+
+            updateSelectionUI();
+        }
+
+        products.forEach((product) => {
+            const card = document.createElement('article');
+            card.className = 'product-card';
+
+            const imageWrap = document.createElement('div');
+            imageWrap.className = 'product-image-wrap';
+            const img = document.createElement('img');
+            img.src = product.image;
+            img.alt = product.name;
+            img.onerror = function() {
+                this.src = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600' viewBox='0 0 600 600'%3E%3Crect width='600' height='600' fill='%23efe7da'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial, sans-serif' font-size='28' fill='%231e2a2a'%3E${encodeURIComponent(product.name)}%3C/text%3E%3C/svg%3E`;
+            };
+            imageWrap.appendChild(img);
+
+            const body = document.createElement('div');
+            body.className = 'product-body';
+
+            const title = document.createElement('h3');
+            title.className = 'product-title';
+            title.textContent = product.name;
+
+            const price = document.createElement('p');
+            price.className = 'product-price';
+            price.textContent = product.price;
+
+            const checkRow = document.createElement('label');
+            checkRow.className = 'product-check';
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.setAttribute('aria-label', `Select ${product.name}`);
+            const checkText = document.createElement('span');
+            checkText.textContent = 'Select product';
+            checkRow.appendChild(checkbox);
+            checkRow.appendChild(checkText);
+
+            body.appendChild(title);
+            body.appendChild(price);
+            body.appendChild(checkRow);
+
+            card.appendChild(imageWrap);
+            card.appendChild(body);
+            productsGrid.appendChild(card);
+
+            card.addEventListener('click', function(event) {
+                if (event.target.tagName === 'INPUT') return;
+                toggleProduct(product.id, card, checkbox);
+            });
+
+            checkbox.addEventListener('click', function(event) {
+                event.stopPropagation();
+                toggleProduct(product.id, card, checkbox);
+            });
+        });
+
+        contactSupplierBtn.addEventListener('click', function() {
+            if (selectedProductIds.size === 0) return;
+
+            const selectedProducts = products.filter((product) => selectedProductIds.has(product.id));
+            const productLines = selectedProducts.map((product) => `- ${product.name} (${product.price})`).join('\n');
+            const message = `Hi, can I have more information about these products, I would like to purchase them\n\nSelected products:\n${productLines}`;
+            const whatsappUrl = `https://wa.me/qr/Y5WQRJIFDRIIC1?text=${encodeURIComponent(message)}`;
+
+            window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
+        });
+
+        updateSelectionUI();
+    </script>
+</body>
+</html>
