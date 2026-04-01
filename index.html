@@ -347,21 +347,28 @@
         }
 
         .collection-tagline-track {
-            display: inline-block;
+            display: inline-flex;
+            width: max-content;
+            gap: 2.5rem;
             font-size: 0.9rem;
             font-style: italic;
             font-weight: 600;
             letter-spacing: 0.5px;
             padding: 0.45rem 0;
-            animation: adRibbonLeftToRight 10s linear infinite;
+            animation: adRibbonLeftToRight 12s linear infinite;
+            will-change: transform;
+        }
+
+        .collection-tagline-text {
+            flex: 0 0 auto;
         }
 
         @keyframes adRibbonLeftToRight {
             0% {
-                transform: translateX(-100%);
+                transform: translateX(calc(-50% - 1.25rem));
             }
             100% {
-                transform: translateX(110%);
+                transform: translateX(0);
             }
         }
 
@@ -1049,7 +1056,7 @@
     <div class="top-header">
         <div class="top-header-container">
             <div class="contact-info">
-                <a href="tel:+263242702853"><i class="fas fa-phone-alt"></i> +263242702853</a>
+                <a href="tel:+263789795764"><i class="fas fa-phone-alt"></i> +263789795764</a>
                 <a href="mailto:info@lizzytadie.store"><i class="fas fa-envelope"></i> info@lizzytadie.store</a>
             </div>
         </div>
@@ -1110,7 +1117,12 @@
         <div class="collection-header">
             <h2 class="section-title">ET COLECTIONS</h2>
             <p class="collection-subtitle">ELIZABETH TADIWA LUXURIES</p>
-            <p class="collection-tagline"><span class="collection-tagline-track">your number one shein plug</span></p>
+            <p class="collection-tagline">
+                <span class="collection-tagline-track">
+                    <span class="collection-tagline-text">your number one shein plug</span>
+                    <span class="collection-tagline-text" aria-hidden="true">your number one shein plug</span>
+                </span>
+            </p>
         </div>
         
         <div class="rubik-collection-container">
