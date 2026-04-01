@@ -1611,6 +1611,7 @@
         const websiteCachedCountKey = 'etl_website_cached_global_count';
         const websiteCounterNamespace = 'et-luxuries-site';
         const websiteCounterKey = 'view-count';
+        const websiteCounterBaseUrl = 'https://api.counterapi.dev/v1';
         const oneDayInMs = 24 * 60 * 60 * 1000;
 
         function setWebsiteViewCount(value) {
@@ -1624,17 +1625,17 @@
             const now = Date.now();
             const lastCountedAt = parseInt(localStorage.getItem(websiteLastCountedAtKey) || '0', 10);
             const shouldIncrement = Number.isNaN(lastCountedAt) || now - lastCountedAt >= oneDayInMs;
-            const action = shouldIncrement ? 'hit' : 'get';
-            const url = `https://api.countapi.xyz/${action}/${websiteCounterNamespace}/${websiteCounterKey}`;
+            const actionPath = shouldIncrement ? 'up' : '';
+            const url = `${websiteCounterBaseUrl}/${websiteCounterNamespace}/${websiteCounterKey}${actionPath ? `/${actionPath}` : ''}`;
 
             try {
                 const response = await fetch(url, { cache: 'no-store' });
                 if (!response.ok) throw new Error('Counter request failed');
 
                 const data = await response.json();
-                if (typeof data.value === 'number') {
-                    setWebsiteViewCount(data.value);
-                    localStorage.setItem(websiteCachedCountKey, String(data.value));
+                if (typeof data.count === 'number') {
+                    setWebsiteViewCount(data.count);
+                    localStorage.setItem(websiteCachedCountKey, String(data.count));
                 }
 
                 if (shouldIncrement) {
