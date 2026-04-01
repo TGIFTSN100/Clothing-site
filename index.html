@@ -599,11 +599,8 @@
         }
 
         .testimonials-grid {
-            max-width: 1200px;
+            max-width: 760px;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
             margin-top: 2.5rem;
         }
 
@@ -614,11 +611,41 @@
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.05);
             text-align: left;
             border: 1px solid #eee;
-            transition: transform 0.3s;
+            transition: opacity 0.35s ease, transform 0.35s ease;
+            display: none;
+            opacity: 0;
+            transform: translateY(8px);
+        }
+
+        .testimonial-card.is-active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .testimonial-card:hover {
             transform: translateY(-5px);
+        }
+
+        .testimonials-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .testimonial-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 1px solid #d4af37;
+            background: transparent;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .testimonial-dot.is-active {
+            background: #d4af37;
         }
 
         .testimonial-text {
@@ -822,7 +849,7 @@
                 height: 220px;
             }
             .testimonials-grid {
-                grid-template-columns: repeat(2, 1fr);
+                max-width: 680px;
             }
             .hero-content h1 {
                 font-size: 3.5rem;
@@ -925,7 +952,7 @@
                 transform: translateY(-50%) scale(1.05);
             }
             .testimonials-grid {
-                grid-template-columns: 1fr;
+                max-width: 100%;
             }
             .vertical-nav {
                 position: absolute;
@@ -1113,7 +1140,7 @@
     <section class="testimonials">
         <h2 class="section-title">TESTIMONIALS</h2>
         <div class="testimonials-grid">
-            <div class="testimonial-card">
+            <div class="testimonial-card is-active">
                 <p class="testimonial-text">"Shopping at Elizabeth Tadiwa Luxuries was an absolute delight! From the moment I walked in, I felt like a VIP. The staff was incredibly attentive and helped me find the perfect outfit for my event. The quality of the clothing is exceptional, and I received countless compliments. Can't wait to visit again!"</p>
                 <h4 class="testimonial-author">SCOTT KUPA</h4>
             </div>
@@ -1126,6 +1153,7 @@
                 <h4 class="testimonial-author">EDD BRANSON</h4>
             </div>
         </div>
+        <div class="testimonials-dots" id="testimonialsDots" aria-label="Testimonial navigation"></div>
     </section>
 
     <!-- Appointment Section -->
@@ -1463,6 +1491,52 @@
                 closeOrderPopup();
             }
         });
+
+        const testimonialCards = document.querySelectorAll('.testimonial-card');
+        const testimonialsDots = document.getElementById('testimonialsDots');
+
+        if (testimonialCards.length > 1 && testimonialsDots) {
+            let activeTestimonialIndex = 0;
+            let testimonialsInterval;
+
+            function renderTestimonial(index) {
+                testimonialCards.forEach((card, cardIndex) => {
+                    card.classList.toggle('is-active', cardIndex === index);
+                });
+
+                const dots = testimonialsDots.querySelectorAll('.testimonial-dot');
+                dots.forEach((dot, dotIndex) => {
+                    dot.classList.toggle('is-active', dotIndex === index);
+                });
+
+                activeTestimonialIndex = index;
+            }
+
+            function nextTestimonial() {
+                const nextIndex = (activeTestimonialIndex + 1) % testimonialCards.length;
+                renderTestimonial(nextIndex);
+            }
+
+            testimonialCards.forEach((_, index) => {
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.className = 'testimonial-dot';
+                dot.setAttribute('aria-label', `Show testimonial ${index + 1}`);
+                dot.addEventListener('click', function() {
+                    renderTestimonial(index);
+                    resetTestimonialTimer();
+                });
+                testimonialsDots.appendChild(dot);
+            });
+
+            function resetTestimonialTimer() {
+                clearInterval(testimonialsInterval);
+                testimonialsInterval = setInterval(nextTestimonial, 4500);
+            }
+
+            renderTestimonial(0);
+            resetTestimonialTimer();
+        }
 
         initRubikCollection();
     </script>
