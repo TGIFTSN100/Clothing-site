@@ -822,6 +822,20 @@
             color: #d4af37;
         }
 
+        .footer-view-counter {
+            margin-top: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            color: #d4af37;
+            font-size: 0.85rem;
+            letter-spacing: 0.4px;
+        }
+
+        .footer-view-counter i {
+            font-size: 0.85rem;
+        }
+
         .social-links {
             display: flex;
             gap: 1rem;
@@ -1205,6 +1219,10 @@
                     <li><a href="#appointment">APPOINTMENT</a></li>
                     <li><a href="#contact">CONTACT</a></li>
                 </ul>
+                <div class="footer-view-counter" aria-live="polite">
+                    <i class="fas fa-eye" aria-hidden="true"></i>
+                    <span id="websiteViewCount">0</span>
+                </div>
             </div>
             <div class="footer-section">
                 <h3>CONTACT</h3>
@@ -1586,6 +1604,16 @@
 
             renderTestimonial(0);
             resetTestimonialTimer();
+        }
+
+        const websiteViewCountElement = document.getElementById('websiteViewCount');
+        const websiteViewStorageKey = 'etl_website_view_count';
+
+        if (websiteViewCountElement) {
+            const storedViews = parseInt(localStorage.getItem(websiteViewStorageKey) || '0', 10);
+            const updatedViews = Number.isNaN(storedViews) ? 1 : storedViews + 1;
+            localStorage.setItem(websiteViewStorageKey, String(updatedViews));
+            websiteViewCountElement.textContent = updatedViews.toLocaleString();
         }
 
         initRubikCollection();
