@@ -247,6 +247,7 @@
         const productsGrid = document.getElementById('productsGrid');
         const selectedCount = document.getElementById('selectedCount');
         const contactSupplierBtn = document.getElementById('contactSupplierBtn');
+        const supplierWhatsAppNumber = '263242702853';
 
         function updateSelectionUI() {
             const count = selectedProductIds.size;
@@ -328,7 +329,7 @@
             const selectedProducts = products.filter((product) => selectedProductIds.has(product.id));
             const productLines = selectedProducts.map((product) => `- ${product.name} (${product.price})`).join('\n');
             const message = `Hi, can I have more information about these products, I would like to purchase them\n\nSelected products:\n${productLines}`;
-            const whatsappUrl = `https://wa.me/qr/Y5WQRJIFDRIIC1?text=${encodeURIComponent(message)}`;
+            const whatsappUrl = `https://wa.me/${supplierWhatsAppNumber}?text=${encodeURIComponent(message)}`;
 
             window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
         });
