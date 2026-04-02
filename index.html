@@ -1134,7 +1134,7 @@
     <!-- Collection Section - Rubik's Cube Style with LARGER IMAGES -->
     <section id="collection" class="collection">
         <div class="collection-header">
-            <h2 class="section-title">ET COLECTIONS</h2>
+            <h2 class="section-title">TG COLECTIONS</h2>
             <p class="collection-subtitle">TAKUDZWA GIFT LUXURIES</p>
             <p class="collection-tagline">
                 <span class="collection-tagline-track">
@@ -1609,24 +1609,19 @@
         }
 
         const websiteViewCountElement = document.getElementById('websiteViewCount');
-        const websiteLastCountedAtKey = 'etl_website_last_counted_at';
         const websiteCachedCountKey = 'etl_website_cached_global_count';
         const websiteCounterNamespace = 'et-luxuries-site';
         const websiteCounterKey = 'view-count';
         const websiteCounterBaseUrl = 'https://api.counterapi.dev/v1';
-        const oneDayInMs = 24 * 60 * 60 * 1000;
 
         function setWebsiteViewCount(value) {
             if (!websiteViewCountElement) return;
             websiteViewCountElement.textContent = Number(value).toLocaleString();
         }
 
-        async function syncWebsiteViewCount() {
+        async function syncWebsiteViewCount(shouldIncrement = false) {
             if (!websiteViewCountElement) return;
 
-            const now = Date.now();
-            const lastCountedAt = parseInt(localStorage.getItem(websiteLastCountedAtKey) || '0', 10);
-            const shouldIncrement = Number.isNaN(lastCountedAt) || now - lastCountedAt >= oneDayInMs;
             const actionPath = shouldIncrement ? 'up' : '';
             const url = `${websiteCounterBaseUrl}/${websiteCounterNamespace}/${websiteCounterKey}${actionPath ? `/${actionPath}` : ''}`;
 
@@ -1639,10 +1634,6 @@
                     setWebsiteViewCount(data.count);
                     localStorage.setItem(websiteCachedCountKey, String(data.count));
                 }
-
-                if (shouldIncrement) {
-                    localStorage.setItem(websiteLastCountedAtKey, String(now));
-                }
             } catch (error) {
                 const cachedCount = parseInt(localStorage.getItem(websiteCachedCountKey) || '0', 10);
                 if (!Number.isNaN(cachedCount) && cachedCount > 0) {
@@ -1651,7 +1642,9 @@
             }
         }
 
-        syncWebsiteViewCount();
+        // Count this page view, then keep refreshing so users see new visits from others.
+        syncWebsiteViewCount(true);
+        setInterval(() => syncWebsiteViewCount(false), 15000);
 
         initRubikCollection();
     </script>

@@ -12,5 +12,5 @@
   <circle cx="100" cy="115" r="3" fill="#2c3e50"/>
   
   <!-- Elegant Text -->
-  <text x="100" y="195" font-family="Helvetica, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#2c3e50" letter-spacing="2">ET LUXURIES</text>
+  <text x="100" y="195" font-family="Helvetica, sans-serif" font-size="10" font-weight="bold" text-anchor="middle" fill="#2c3e50" letter-spacing="2">TG LUXURIES</text>
 </svg>
